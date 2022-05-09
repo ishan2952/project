@@ -1,0 +1,52 @@
+﻿@model WebApplication2.Models.Product
+
+@{
+    ViewBag.Title = "ShowProduct";
+}
+
+<h2>ShowProduct</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="col-md-offset-2 col-md-10">
+        <a href="EditProduct?code=@Model.ProductCode" style="background-color:black; color:white" class="btn btn-default" type="submit">Edit</a> |
+        <a type="submit" href="/Product/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+    </div>
+</p>

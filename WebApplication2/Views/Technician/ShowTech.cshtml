@@ -1,0 +1,52 @@
+﻿@model WebApplication2.Models.Technician
+
+@{
+    ViewBag.Title = "ShowTech";
+}
+
+<h2>ShowTech</h2>
+
+<div>
+    <h4>Technician</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="color:white">
+            @Html.DisplayNameFor(model => model.TechID)
+        </dt>
+
+        <dd style="color:white">
+            @Html.DisplayFor(model => model.TechID)
+        </dd>
+
+        <dt style="color:white">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd style="color:white">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt style="color:white">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt style="color:white">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd style="color:white">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="col-md-offset-2 col-md-10">
+        <a href="EditTech?id=@Model.TechID" style="background-color:black; color:white" class="btn btn-default" type="submit">Edit</a> |
+        <a type="submit" href="/Technician/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+    </div>
+</p>

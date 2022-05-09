@@ -1,0 +1,88 @@
+﻿@model WebApplication2.Models.State
+
+@{
+    ViewBag.Title = "EditState";
+}
+
+<h2>EditState</h2>
+
+
+<div class="form-horizontal">
+    <h4>State</h4>
+    <hr />
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">StateCode:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="StateCode" name="StateCode" value="@Model.StateCode" disabled>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">StateName:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="StateName" name="StateName" value="@Model.StateName">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">FirstZipCode:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="FirstZipCode" name="FirstZipCode" value="@Model.FirstZipCode">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">LAsttZipCode:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="LastZipCode" name="LastZipCode" value="@Model.LastZipCode">
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="EditState" value="Save" class="btn btn-default" style="background-color:black; color:white" onclick="editState()" />
+    </div>
+</div>
+
+
+<div class="col-md-offset-2 col-md-10">
+    <a type="submit" href="/State/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    function editState() {
+        var StateCode = document.getElementById("StateCode").value;
+        var StateName = document.getElementById("StateName").value;
+        var FirstZipCode = document.getElementById("FirstZipCode").value;
+        var LastZipCode = document.getElementById("LastZipCode").value;
+
+        var State =
+    {
+        StateCode: StateCode,
+        StateName: StateName,
+        FirstZipCode: FirstZipCode,
+        LastZipCode: LastZipCode
+
+    };
+    $.ajax({
+        type: "POST",
+        url: "/State/EditDb?id=@Model.StateCode",
+        data: JSON.stringify(State),
+        success: function (data) {
+            alert("Success..");
+
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+    });
+        location.href = "/State/Index";
+    }
+
+</script>

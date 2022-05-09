@@ -1,0 +1,90 @@
+﻿@model WebApplication2.Models.Technician
+@{
+    ViewBag.Title = "EditTech";
+}
+
+<h2>EditTech</h2>
+<div class="form-horizontal">
+    <h4 style="color:white">Technicians</h4>
+    <hr/>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="TechID">TechID:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="number" id="TechID" name="TechID" disabled value="@Model.TechID"><br><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Name">Name:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="text" id="Name" name="Name" value="@Model.Name"><br><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Email">Email:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="text" id="Email" name="Email"  value="@Model.Email"><br><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Phone">Phone:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="text" id="Phone" name="Phone" value="@Model.Phone"><br><br>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="EditTech" style="background-color:black; color:white" value="Save" class="btn btn-default" onclick="editTech()" />
+    </div>
+</div>
+<div class="col-md-offset-2 col-md-10">
+    <a type="submit" href="/Technicians/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function editTech() {
+        var TechID = document.getElementById("TechID").value;
+        var Name = document.getElementById("Name").value;
+        var Email = document.getElementById("Email").value;
+        var Phone = document.getElementById("Phone").value;
+
+        var technician =
+        {
+            TechID: TechID,
+            Name: Name,
+            Email: Email,
+            Phone: Phone
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Technician/EditT?id=@Model.TechID",
+        data: JSON.stringify(technician),
+        success: function (data) {
+            alert("Success..");
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+    });
+        location.href = "/Technician/Index";
+    }
+
+</script>
+

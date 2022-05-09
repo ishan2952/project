@@ -1,0 +1,52 @@
+﻿@model WebApplication2.Models.State
+
+@{
+    ViewBag.Title = "ShowState";
+}
+
+<h2>ShowState</h2>
+
+<div>
+    <h4>State</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StateCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastZipCode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="col-md-offset-2 col-md-10">
+        <a href="EditState?id=@Model.StateCode" style="background-color:black; color:white" class="btn btn-default" type="submit">Edit</a> |
+        <a type="submit" href="/State/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+    </div>
+</p>

@@ -1,0 +1,87 @@
+﻿@model WebApplication2.Models.Product
+
+@{
+    ViewBag.Title = "EditProducts";
+}
+
+<h2>EditProduct</h2>
+
+<div class="form-horizontal">
+    <h4>Products</h4>
+    <hr />
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">ProductCode:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="ProductCode" name="ProductCode" disabled value="@Model.ProductCode">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">Name:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="Name" name="name" value="@Model.Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">Version:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="Version" name="Version" value="@Model.Version">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">ReleaseDate:</label>
+        <div class="col-lg-8">
+            <input class="form-control" type="text" id="ReleaseDate" name="name" value="@Model.ReleaseDate">
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="EditProduct" style="background-color:black; color:white" value="Save" class="btn btn-default" onclick="editProduct()" />
+    </div>
+</div>
+<div class="col-md-offset-2 col-md-10">
+    <a type="submit" href="/Product/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<script>
+    function editProduct() {
+        var ProductCode = document.getElementById("ProductCode").value;
+        var Name = document.getElementById("Name").value;
+        var Version = document.getElementById("Version").value;
+        var ReleaseDate = document.getElementById("ReleaseDate").value;
+
+        var Product =
+    {
+        ProductCode: ProductCode,
+        Name: Name,
+            Version: Version,
+            ReleaseDate: ReleaseDate
+
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Product/edtPrduct?code=@Model.ProductCode",
+        data: JSON.stringify(Product),
+        success: function (data) {
+            alert("Success..");
+            
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+    });
+        location.href = "/Product/Index";
+    }
+
+</script>
+    }
+

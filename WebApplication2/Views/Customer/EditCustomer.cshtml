@@ -1,0 +1,119 @@
+﻿@model WebApplication2.Models.Customer
+
+@{
+    ViewBag.Title = "EditCustomer";
+}
+
+<h2 style="color:white">EditCustomer</h2>
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">CustomerID:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="CustomerID" name="CustomerID" disabled value="@Model.CustomerID">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">Name:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="Name" name="name" value="@Model.Name">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">Address:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="Address" name="address" value="@Model.Address">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">City:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="City" name="city" value="@Model.City">
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">State:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="State" name="state" value="@Model.State">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">ZipCode:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="number" id="ZipCode" name="zipcode" value="@Model.ZipCode">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">Phone:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="tel" id="Phone" name="phone" value="@Model.Phone">
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-lg-3 control-label">Email:</label>
+    <div class="col-lg-8">
+        <input class="form-control" type="text" id="Email" name="email" value="@Model.Email">
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit"  id="EditCustomer" value="Save" class="btn btn-default" onclick="editCustomer()" style="background-color:black; color:white">
+        </div>
+    </div>
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <a type="submit" href="/Customer/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+
+        </div>
+    </div>
+</div>
+<script>
+    function editCustomer() {
+        var CustomerID = document.getElementById("CustomerID").value;
+        var Name = document.getElementById("Name").value;
+        var Address = document.getElementById("Address").value;
+        var City = document.getElementById("City").value;
+        var State = document.getElementById("State").value;
+        var ZipCode = document.getElementById("ZipCode").value;
+        var Phone = document.getElementById("Phone").value;
+        var Email = document.getElementById("Email").value;
+
+        var Customer =
+        {
+            CustomerID: CustomerID,
+            Name: Name,
+            Address: Address,
+            City: City,
+            State: State,
+            ZipCode: ZipCode,
+            Phone: Phone,
+            Email: Email
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Customer/edtcust?id=@Model.CustomerID",
+            data: JSON.stringify(Customer),
+            success: function (data) {
+                alert("Success..");
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        });
+        location.href = "/Customer/Index";
+       
+
+    }
+    
+
+</script>

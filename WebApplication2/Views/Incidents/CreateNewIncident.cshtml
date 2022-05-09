@@ -1,0 +1,124 @@
+﻿@model WebApplication2.Models.Incident
+@{
+    ViewBag.Title = "View";
+    var customers = ViewData["Customers"] as SelectList;
+    var products = ViewData["Products"] as SelectList;
+    var technicians = ViewData["Technicians"] as SelectList;
+}
+<h2>CreateNewIncident</h2>
+<div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Title">Title:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="Title" name="Title"><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Description">Description:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="Description" name="Description"><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Customer">Customer:</label>
+        </div>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CustomerID, customers, "", new { @class = "form-control", id = "selectCategory" })
+            <br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Customer">Product:</label>
+        </div>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ProductCode, products, "", new { @class = "form-control", id = "selectProduct" })
+            <br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="Customer">Technician:</label>
+        </div>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TechID, technicians, "", new { @class = "form-control", id = "selectTechnician" })
+            <br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="DateOpened">Date Opened:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="date" class="form-control" id="DateOpened" name="DateOpened"><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+            <label for="DateClosed">Date Closed:</label>
+        </div>
+        <div class="col-md-10">
+            <input type="date" id="DateClosed" class="form-control" name="DateClosed"><br>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="AddIncidents" value="Create" class="btn btn-default" onclick="addIncident()" style="background-color:black; color:white">
+        </div>
+    </div>
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <a type="submit" href="/Incidents/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function addIncident() {
+        var Customer = document.getElementById("selectCategory").value;
+        var Product = document.getElementById("selectProduct").value;
+        var Technician = document.getElementById("selectTechnician").value;
+        var Title = document.getElementById("Title").value;
+        var Description = document.getElementById("Description").value;
+        var DateOpened = document.getElementById("DateOpened").value;
+        var DateClosed = document.getElementById("DateClosed").value;
+
+        var Incident =
+        {
+            CustomerID: Customer,
+            ProductCode: Product,
+            Title: Title,
+            Description: Description,
+            DateOpened: DateOpened,
+            DateClosed: DateClosed,
+            TechID: Technician
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Incidents/AddNewToDB",
+            data: JSON.stringify(Incident),
+            success: function (data) {
+                alert("Success..");
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+        });
+        location.href = "/Incidents/Index";
+    }
+</script>
+

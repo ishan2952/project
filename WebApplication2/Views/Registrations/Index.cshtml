@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication2.Models.Registration>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:white">List of Registrations</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateNewReg")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Customer
+        </th>
+        <th>
+            Product
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationDate)
+        </td>
+        <td>
+            <a href="EditRegistrations?id=@item.CustomerID">Edit</a> | 
+            <a href="ShowRegDetails?id=@item.CustomerID">Details</a> |
+            <a href="DeleteRegistrations?id=@item.CustomerID">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication2.Models.Technician>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:white">List of Technicians</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateNewTech")
+</p>
+<table class="table">
+    <tr>
+        <th style="color:white">
+            @Html.DisplayNameFor(model => model.TechID)
+        </th>
+        <th style="color:white">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th style="color:white">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th style="color:white">
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TechID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            <a href="EditTech?id=@item.TechID" style="color:white">Edit</a>  |
+            <a href="ShowTech?id=@item.TechID" style="color:white">Details</a> |
+            <a href="DeleteTech?id=@item.TechID" style="color:white">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,49 @@
+﻿@model WebApplication2.Models.Registration
+
+@{
+    ViewBag.Title = "ShowRegDetails";
+}
+
+<h2>ShowRegDetails</h2>
+
+<div>
+    <h4>Registrations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Customer Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Product
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+    </dl>
+</div>
+    <p>
+        <div class="col-md-offset-2 col-md-10">
+            <a href="EditRegistrations?id=@Model.CustomerID" style="background-color:black; color:white" class="btn btn-default" type="submit">Edit</a> |
+            <a type="submit" href="/Registrations/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+        </div>
+    </p>
+
+

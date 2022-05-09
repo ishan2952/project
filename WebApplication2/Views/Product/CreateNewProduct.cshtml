@@ -1,0 +1,73 @@
+﻿@model WebApplication2.Models.Product
+
+@{
+    ViewBag.Title = "AddNewProduct";
+}
+
+<h2>AddNewProduct</h2>
+
+
+<div class="form-group">
+    <label for="ProductCode" style="color:white">ProductCode</label>
+    <input type="text" class="form-control" id="ProductCode" placeholder="Enter your ProductCode ">
+</div>
+
+<div class="form-group">
+    <label for="Name" style="color:white">Name</label>
+    <input type="text" class="form-control" id="Name" placeholder="Enter your Name ">
+</div>
+
+<div class="form-group">
+    <label for="Version" style="color:white">Version</label>
+    <input type="text" class="form-control" id="Version" placeholder="Enter your Version ">
+</div>
+
+<div class="form-group">
+    <label for="ReleaseDate" style="color:white">ReleaseDate</label>
+    <input type="date" class="form-control" id="ReleaseDate" placeholder="Enter your ReleaseDate ">
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="AddProduct" style="background-color:black; color:white" value="Save" class="btn btn-default" onclick="addProduct()" />
+    </div>
+</div>
+<div class="col-md-offset-2 col-md-10">
+    <a type="submit" href="/Product/Index" class="btn btn-default" style="background-color:black; color:white">Back To List</a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        function addProduct() {
+            var ProductCode = document.getElementById("ProductCode").value;
+            var Name = document.getElementById("Name").value;
+            var Version = document.getElementById("Version").value;
+            var ReleaseDate = document.getElementById("ReleaseDate").value;
+
+            var Product =
+            {
+                ProductCode: ProductCode,
+                Name: Name,
+                Version: Version,
+                ReleaseDate: ReleaseDate
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Product/AddNewProductToDB",
+                data: JSON.stringify(Product),
+                success: function (data) {
+                    alert("Success..");
+
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            });
+            location.href = "/Product/Index";
+        }
+
+    </script>
+}
+
